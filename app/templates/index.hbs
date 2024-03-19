@@ -1,0 +1,25 @@
+{{page-title "Index"}}
+<h4>Please click on the <i>Zune</i> brand link twice and open your console.</h4>
+<ul>
+  {{#each this.model as |item|}}
+    <li>{{item.name}} - ${{item.price}} - <a href="#" {{on "click" (fn this.showBrandInfo item)}}>About brand</a></li>
+  {{/each}}
+</ul>
+<hr>
+{{#if this.selectedBrand}}
+  {{#if this.isLoading}}
+    Loading data...
+  {{else}}
+    <div class="brand-info">
+      <p>Brand name: {{this.selectedBrand.name}}</p>
+      <p>Brand country: {{this.selectedBrand.country}}</p>
+      <p>Brand start date: {{this.selectedBrand.startDate}}</p>
+      {{#if this.selectedBrand.endDate}}
+        <p>Brand end date: {{this.selectedBrand.endDate}}</p>
+      {{/if}}
+    </div>
+    <div>
+      <a href="#" {{on "click" this.hideBrandInfo}}>Close brand info</a>
+    </div>
+  {{/if}}
+{{/if}}

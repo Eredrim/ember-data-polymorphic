@@ -1,7 +1,7 @@
-# ember-data-polymorphic
+# Ember Data Polymorphic issue in v4.12
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This project is a proof a concept to demonstrate polymorphism issues with RESTAdapter in Ember-Data 4.12.
+It has been designed only for support purpose.
 
 ## Prerequisites
 
@@ -11,47 +11,43 @@ You will need the following things properly installed on your computer.
 * [Node.js](https://nodejs.org/)
 * [Yarn](https://yarnpkg.com/)
 * [Ember CLI](https://cli.emberjs.com/release/)
-* [Google Chrome](https://google.com/chrome/)
 
 ## Installation
 
 * `git clone <repository-url>` this repository
 * `cd ember-data-polymorphic`
-* `yarn install`
+* `yarn`
 
 ## Running / Development
 
-* `ember serve`
+* `yarn serve:stack`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+* Query your backend at [http://localhost:3000](http://localhost:3000).
 
-### Code Generators
+### Reproduction steps
 
-Make use of the many generators for code, try `ember help generate` for more details
+Once the app is running, go on the [app homepage](http://localhost:4200) and click twice on the "Zune 30".  
+Open your console to see the error.
 
-### Running Tests
+### Data models
 
-* `ember test`
-* `ember test --server`
-
-### Linting
-
-* `yarn lint`
-* `yarn lint:fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://cli.emberjs.com/release/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+```mermaid
+classDiagram
+    direction TB
+    Brand <|-- FormerBrand
+    Article "1..**" -- "1" Brand
+    class Brand{
+      +number id
+      +string name
+      +string country
+      +date startDate
+    }
+    class FormerBrand{
+      +date endDate
+    }
+    class Article{
+      +number id
+      +string name
+      +number price
+    }
+```
